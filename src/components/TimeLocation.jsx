@@ -1,15 +1,15 @@
 import "./timelocation.css"
 
 
-function TimeLocation () {
+function TimeLocation ({day}) {
     return (
       <div className="timelocation">
         <div className="weekndate">
-          <div className="week">Mon</div>
-          <div className="date">4.9</div>
+          <div className="week">{day.week}</div>
+          <div className="date">{day.date}</div>
         </div>
-        <div className="timestamp">12:55pm</div>
-        <div className="location">Sydney</div>
+        <div className="timestamp">{day.time}</div>
+        <div className="location">{day.location}</div>
       </div>
     );
 }
