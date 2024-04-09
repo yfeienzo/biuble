@@ -1,5 +1,6 @@
 import './App.css';
 import TimeLocation from './components/TimeLocation';
+import Row from './components/Row';
 
 const data = [
   {
@@ -8,35 +9,42 @@ const data = [
     date: "3.9",
     time: "12.55pm",
     location: "Sydney",
-    words: "what is wrong"
+    content: "what is wrong",
+    type: "words"
   },
   {
     id: 2,
     week: "Wed",
     date: "3.14",
     time: "11.12pm",
-    location: "Melbourne"
+    location: "Melbourne",
+    content: "https://media.istockphoto.com/id/642438646/photo/healthy-hens-are-happy-hens.jpg?s=1024x1024&w=is&k=20&c=W8YnlOzr05Oqd_EWRHkF1InIbc24P2FDuUaQ1Vgo_8s=",
+    type: "pics"
   },
   {
     id: 3,
     week: "Mon",
     date: "4.9",
     time: "9.10am",
-    location: "Sydney"
+    location: "Sydney",
+    content: "oks simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    type: "words"
   },
   {
     id: 4,
     week: "Mon",
     date: "4.9",
     time: "12.55pm",
-    location: "Sydney"
+    location: "Sydney",
+    content: "yes",
+    type: "words"
   },
 ]
 
 function App() {
   return (
     <>
-    {data.sort((a, b) => b.id - a.id).map(day => <TimeLocation day={day} />)}
+    {data.sort((a, b) => b.id - a.id).map(day => <Row day={day} />)}
     </>
   );
 }

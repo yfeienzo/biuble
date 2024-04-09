@@ -1,6 +1,5 @@
 import "./timelocation.css"
 
-
 function TimeLocation ({day}) {
     return (
       <div className="timelocation">
