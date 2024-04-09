@@ -1,0 +1,35 @@
+.timelocation {
+   width: 5rem;
+   text-align: right;
+   background-color: yellow;
+}
+
+.timestamp {
+   color:  #9c9876;
+   font-size: 14px;
+}
+
+.weekndate {
+   display: flex;
+   flex-direction: row;
+   justify-content: end;
+}
+
+.date {
+   margin-left: .5rem;
+   font-size: 18px;
+}
+
+.week {
+   font-size: 18px;
+}
+
+.location {
+   color : #999;
+   font-size: 12px;
+}
+
+.timestamp, .weekndate, .location {
+   padding: 2px
+}
+

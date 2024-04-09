@@ -1,0 +1,8 @@
+@font-face {
+  font-family: Canvas_Black;
+  src: url("./Canvas_Black.otf") format("opentype");
+}
+
+body, html { 
+  font-family: 'Canvas_Black', sans-serif;
+}
