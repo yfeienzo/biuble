@@ -1,7 +1,7 @@
 .timelocation {
-   width: 5rem;
+   width: 6rem;
    text-align: right;
-   background-color: yellow;
+   border-right: 2px solid #222;
 }
 
 .timestamp {
@@ -31,5 +31,9 @@
 
 .timestamp, .weekndate, .location {
    padding: 2px
+}
+
+.weekndate, .timestamp, .location {
+   padding-right : .5rem
 }
 
