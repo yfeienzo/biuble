@@ -10,9 +10,9 @@ const data = [
     date: "3.9",
     time: "12.55pm",
     location: "Sydney",
-    content: "what is wrong",
+    content: "week 16 content",
     type: "words",
-    number: 17,
+    number: 16,
   },
   {
     id: 2,
@@ -57,12 +57,12 @@ const data = [
 ]
 
 function App() {
-  const [number, setNumber] = useState(1)
+  const [number, setNumber] = useState(17)
   return (
     <>
     <div className='year'>2024</div>
     <WeekSlider />
-    {data.sort((a, b) => b.id - a.id).map(day => <Row day={day} />)}
+    {data.sort((a, b) => b.id - a.id).map(day => day.number === number && <Row day={day} />)}
     </>
   );
 }
