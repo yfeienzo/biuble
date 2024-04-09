@@ -7,7 +7,8 @@ const data = [
     week: "Mon",
     date: "3.9",
     time: "12.55pm",
-    location: "Sydney"
+    location: "Sydney",
+    words: "what is wrong"
   },
   {
     id: 2,
