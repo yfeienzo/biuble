@@ -16,3 +16,7 @@
     font-size: 12px;
     color: #232323;
 }
+
+.prevButton, .nextButton {
+    width: 20px;
+}
