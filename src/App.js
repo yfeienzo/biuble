@@ -61,7 +61,7 @@ function App() {
   return (
     <>
     <div className='year'>2024</div>
-    <WeekSlider />
+    <WeekSlider number={number} handleClick={setNumber} />
     {data.sort((a, b) => b.id - a.id).map(day => day.number === number && <Row day={day} />)}
     </>
   );
