@@ -20,3 +20,7 @@
 .prevButton, .nextButton {
     width: 20px;
 }
+
+.prevButton,.nextButton:hover {
+    cursor: pointer;
+}
