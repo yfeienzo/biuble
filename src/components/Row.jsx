@@ -7,7 +7,8 @@ import { useTypewriter } from 'react-simple-typewriter'
 function Row ({day}) {
     const [poem] = useTypewriter({
         words: day.type === "poems" && day.content,
-        loop: 0
+        loop: 0,
+        deleteSpeed: 30
       })
     return (
         <div className="row">
