@@ -1,6 +1,7 @@
 import "./row.css"
 import TimeLocation from "./TimeLocation";
 import { useTypewriter } from 'react-simple-typewriter'
+import FadeIn from 'react-fade-in';
 
 
 
@@ -11,15 +12,17 @@ function Row ({day}) {
         deleteSpeed: 30
       })
     return (
-        <div className="row">
-            <TimeLocation day={day} />
-            <div className="content">{
-            day.type === "words" ? day.content :
-            day.type === "pics" ? day.content.map(address => <img width="100%" src={address} /> ):
-            day.type == "poems" ? 
-            <div>{poem}</div>
-            : <div>no content</div>}</div>
-        </div>
+        <FadeIn>
+            <div className="row">
+                <TimeLocation day={day} />
+                <div className="content">{
+                day.type === "words" ? day.content :
+                day.type === "pics" ? day.content.map(address => <img width="100%" src={address} /> ):
+                day.type == "poems" ? 
+                <div>{poem}</div>
+                : <div>no content</div>}</div>
+            </div>
+        </FadeIn>
     );
 }
 
