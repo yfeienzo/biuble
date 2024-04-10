@@ -1,3 +1,8 @@
+@font-face {
+    font-family: Typewriter;
+    src: url("../Typewriter.otf") format("opentype");
+  }
+
 .row {
     display: flex;
 }
@@ -6,5 +11,5 @@
     width: 100%;
     text-wrap: wrap;
     line-height: 2;
-    font-family: Courier, georgia;
+    font-family: Typewriter;
 }
