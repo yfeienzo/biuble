@@ -22,9 +22,6 @@ function getDateRangeOfWeek(w, y) {
   return `${startDate} - ${endDate}`;
 }
 
-console.log(getDateRangeOfWeek(15, 2024));
-
-
 function WeekSlider ({number, handleClick}) {
     return (
       <div className="sliderContainer">
