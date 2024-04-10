@@ -6,63 +6,63 @@ import { useState } from 'react';
 const data = [
   {
     id: 1,
-    week: "Mon",
+    week: "Sat",
     date: "3.9",
     time: "12.55pm",
     location: "Sydney",
     content: "week 16 content",
     type: "words",
-    number: 16,
+    number: 10,
   },
   {
     id: 2,
-    week: "Wed",
+    week: "Thu",
     date: "3.14",
     time: "11.12pm",
     location: "Melbourne",
     content: ["https://media.istockphoto.com/id/642438646/photo/healthy-hens-are-happy-hens.jpg?s=1024x1024&w=is&k=20&c=W8YnlOzr05Oqd_EWRHkF1InIbc24P2FDuUaQ1Vgo_8s=","https://photographylife.com/wp-content/uploads/2017/01/Best-of-2016-Nasim-Mansurov-20.jpg"],
     type: "pics",
-    number: 17,
+    number: 11,
   },
   {
     id: 3,
-    week: "Mon",
+    week: "Tue",
     date: "4.9",
     time: "9.10am",
     location: "Sydney",
     content: "oks simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
     type: "words",
-    number: 17
+    number: 15
   },
   {
     id: 4,
-    week: "Mon",
+    week: "Tue",
     date: "4.9",
     time: "12.55pm",
     location: "Sydney",
     content: "yes",
     type: "words",
-    number: 17
+    number: 15
   },
   {
     id: 5,
-    week: "Tue",
+    week: "Wed",
     date: "4.10",
     time: "11.00pm",
     location: "Melbourne",
     content: ["A poem","a poem is a poem","a poem is not just words"],
     type: "poems",
-    number: 17
+    number: 15
   },
   {
     id: 6,
-    week: "Tue",
+    week: "Sat",
     date: "4.20",
     time: "11.30pm",
     location: "Perth",
     content: "next week content now this is",
     type: "words",
-    number: 18
+    number: 16
   },
 ]
 
