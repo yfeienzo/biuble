@@ -20,7 +20,7 @@ const data = [
     date: "3.14",
     time: "11.12pm",
     location: "Melbourne",
-    content: "https://media.istockphoto.com/id/642438646/photo/healthy-hens-are-happy-hens.jpg?s=1024x1024&w=is&k=20&c=W8YnlOzr05Oqd_EWRHkF1InIbc24P2FDuUaQ1Vgo_8s=",
+    content: ["https://media.istockphoto.com/id/642438646/photo/healthy-hens-are-happy-hens.jpg?s=1024x1024&w=is&k=20&c=W8YnlOzr05Oqd_EWRHkF1InIbc24P2FDuUaQ1Vgo_8s=","https://photographylife.com/wp-content/uploads/2017/01/Best-of-2016-Nasim-Mansurov-20.jpg"],
     type: "pics",
     number: 17,
   },
