@@ -1,7 +1,9 @@
 import './App.css';
 import Row from './components/Row';
 import WeekSlider from './components/WeekSlider';
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
+import { supabase } from './utils/supabase'
+
 
 const data = [
   {
@@ -10,7 +12,7 @@ const data = [
     date: "3.9",
     time: "12.55pm",
     location: "Sydney",
-    content: "week 16 content",
+    content: "week 10 content",
     type: "words",
     number: 10,
   },
@@ -85,6 +87,19 @@ function getDateWeek(date) {
 
 function App() {
   const [number, setNumber] = useState(getDateWeek())
+
+  const [countries, setCountries] = useState([]);
+
+    useEffect(() => {
+      getCountries();
+    }, []);
+
+    async function getCountries() {
+      const { data } = await supabase.from("posts").select();
+      setCountries(data);
+    }
+
+
   return (
     <>
     <div className='year'>2024</div>
