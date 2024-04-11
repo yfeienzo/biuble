@@ -90,6 +90,7 @@ function App() {
     <div className='year'>2024</div>
     <WeekSlider number={number} handleClick={setNumber} />
     {data.sort((a, b) => b.id - a.id).map(day => day.number === number && <Row day={day} />)}
+    <footer className='footer'>2024 © Yang Fei</footer>
     </>
   );
 }
