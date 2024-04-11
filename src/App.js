@@ -4,6 +4,8 @@ import WeekSlider from './components/WeekSlider';
 import { useState , useEffect} from 'react';
 import { supabase } from './utils/supabase'
 import Login from './assets/login.svg';
+import { Link } from "react-router-dom";
+
 
 function getDateWeek(date) {
   const currentDate = 
@@ -41,7 +43,7 @@ function App() {
     <>
     <div className="header">
       <div className='year'>2024</div>
-      <img src={Login} className="login" />
+      <Link to="/admin"><img src={Login} className="login" /></Link>
     </div>
     <WeekSlider number={number} handleClick={setNumber} />
     {posts.sort((a, b) => b.id - a.id).map(day => day.number === number && <Row day={day} />)}
