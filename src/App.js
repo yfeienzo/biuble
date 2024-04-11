@@ -3,6 +3,7 @@ import Row from './components/Row';
 import WeekSlider from './components/WeekSlider';
 import { useState , useEffect} from 'react';
 import { supabase } from './utils/supabase'
+import Login from './assets/login.svg';
 
 function getDateWeek(date) {
   const currentDate = 
@@ -38,7 +39,10 @@ function App() {
 
   return (
     <>
-    <div className='year'>2024</div>
+    <div className="header">
+      <div className='year'>2024</div>
+      <img src={Login} className="login" />
+    </div>
     <WeekSlider number={number} handleClick={setNumber} />
     {posts.sort((a, b) => b.id - a.id).map(day => day.number === number && <Row day={day} />)}
     <footer className='footer'>2024 © Yang Fei</footer>
