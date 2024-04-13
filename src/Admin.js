@@ -5,6 +5,9 @@ import WeekSlider from './components/WeekSlider';
 import { useState , useEffect} from 'react';
 import { supabase } from './utils/supabase'
 import FadeIn from 'react-fade-in';
+import Add from './assets/plus.svg';
+import 'react-responsive-modal/styles.css';
+import { Modal } from 'react-responsive-modal';
 
 
 function getDateWeek(date) {
@@ -25,6 +28,11 @@ function getDateWeek(date) {
 }
 
 function Admin() {
+    const [open, setOpen] = useState(false);
+
+    const onOpenModal = () => setOpen(true);
+    const onCloseModal = () => setOpen(false);
+    
   const [validated, setValidated] = useState(false)
   const [pass, setPass] = useState('')
   const [notify, setNotify] = useState(false);
@@ -47,8 +55,12 @@ function Admin() {
         return (
             <>
             <div className="header">
-            <div className='year'>2024</div>
+                <div className='year'>2024</div>
+                <img src={Add} className='login' onClick={onOpenModal} />
             </div>
+            <Modal open={open} onClose={onCloseModal} center>
+                <h2>Simple centered modal</h2>
+            </Modal>
             <WeekSlider number={number} handleClick={setNumber} />
             {posts.sort((a, b) => b.id - a.id).map(day => day.number === number && <Row day={day} />)}
             <footer className='footer'>2024 © Yang Fei</footer>
