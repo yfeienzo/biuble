@@ -16,6 +16,7 @@
     width: 8rem;
     font-size: 22px;
     font-family: 'Canvas_Black';
+    caret-color: black;
 }
 
 .validationContainer {
