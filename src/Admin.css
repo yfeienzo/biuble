@@ -24,3 +24,9 @@
     text-align: center;
     margin-top: 8rem;
 }
+
+.wrongText {
+    text-align: center;
+    margin: 1rem;
+    font-size: 18px;
+}

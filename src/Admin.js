@@ -4,6 +4,8 @@ import Row from './components/Row';
 import WeekSlider from './components/WeekSlider';
 import { useState , useEffect} from 'react';
 import { supabase } from './utils/supabase'
+import FadeIn from 'react-fade-in';
+
 
 function getDateWeek(date) {
   const currentDate = 
@@ -25,6 +27,8 @@ function getDateWeek(date) {
 function Admin() {
   const [validated, setValidated] = useState(false)
   const [pass, setPass] = useState('')
+  const [notify, setNotify] = useState(false);
+
   const [number, setNumber] = useState(getDateWeek())
 
   const [posts, setPosts] = useState([]);
@@ -53,10 +57,13 @@ function Admin() {
     }
     else {
         return (
+            <>
             <div className="validationContainer">
                 <input className="validationInput" type="text" value={pass} onChange={(e) => setPass(e.target.value)} />
-                <div className="validationButton" onClick={()=> pass === '27998' ? setValidated(true) : console.log("not pass")}>it's me</div>
+                <div className="validationButton" onClick={()=> pass === '27998' ? setValidated(true) : setNotify(true)}>it's me</div>
             </div>
+            {notify && <FadeIn><div className='wrongText'>wrong pass!</div></FadeIn>}
+            </>
         )
     }
 }
