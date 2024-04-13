@@ -1,0 +1,26 @@
+.validationButton {
+    background: #a31e32;
+    color: white;
+    width: 8rem;
+    padding: 1rem;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.validationInput {
+    padding: 1rem;
+    border: none;
+    border-bottom: 2px solid black;
+    background: transparent;
+    outline: none;
+    width: 8rem;
+    font-size: 22px;
+    font-family: 'Canvas_Black';
+}
+
+.validationContainer {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 8rem;
+}
