@@ -18,7 +18,11 @@ function getDateOfISOWeek(w, y) {
 function getDateRangeOfWeek(w, y) {
   var date = getDateOfISOWeek(w, y);
   const startDate = date.getMonth()+1 + '.' + date.getDate()
-  const endDate = date.getMonth()+1 + '.' + (date.getDate()+ 6)
+  const threhold = new Date(2024, date.getMonth()+1, 0).getDate();
+  console.log(date.getMonth() + 1,threhold)
+  const endDate = date.getDate() + 6 > threhold ? date.getMonth()+2 > 12 ? 1 + '.' + (date.getDate () + 6 - threhold) :
+  date.getMonth()+2 + '.' + (date.getDate () + 6 - threhold) :
+   date.getMonth()+1 + '.' + (date.getDate()+ 6)
   return `${startDate} - ${endDate}`;
 }
 
