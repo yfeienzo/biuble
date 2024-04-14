@@ -6,7 +6,9 @@
 .year {
   font-size: 30px;
   padding-left: 1rem;
-  padding-top: 1rem
+  padding-top: 1rem;
+  color: black;
+  text-decoration: none;
 }
 
 

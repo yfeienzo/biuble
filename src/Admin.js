@@ -8,6 +8,7 @@ import FadeIn from 'react-fade-in';
 import Add from './assets/plus.svg';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
+import { Link } from "react-router-dom";
 
 
 function getDateWeek(date) {
@@ -28,6 +29,9 @@ function getDateWeek(date) {
 }
 
 function Admin() {
+
+    const [content, setContent] = useState('');
+
     const [open, setOpen] = useState(false);
 
     const onOpenModal = () => setOpen(true);
@@ -51,8 +55,9 @@ function Admin() {
     }
 
 
-    const publish = () => {
-        console.log('publish')
+    const publish = async () => {
+        const { error } = await supabase.from("posts").insert({type: "words", week: "Sun", date: "4.14", time: "5:37pm", location: "Sydney", content, number: 15})
+        setOpen(false)
     }
 
 
@@ -61,12 +66,12 @@ function Admin() {
         return (
             <>
             <div className="header">
-                <div className='year'>2024</div>
+                <Link className='year' to="/"><div>2024</div></Link>
                 <img src={Add} className='login' onClick={onOpenModal} />
             </div>
             <Modal open={open} onClose={onCloseModal} center>
                 <h2>New</h2>
-                <textarea className='publishContent' name="content" rows={4} cols={40} />
+                <textarea className='publishContent' name="content" rows={4} cols={40} onChange={(e) => setContent(e.target.value)} value={content}/>
                 <br />
                 <div className='publishBtn' onClick={publish}>Publish</div>
             </Modal>

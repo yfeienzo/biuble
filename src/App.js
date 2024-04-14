@@ -42,7 +42,7 @@ function App() {
   return (
     <>
     <div className="header">
-      <div className='year'>2024</div>
+      <Link className='year' to="/"><div >2024</div></Link>
       <Link to="/admin"><img src={Login} className="login" /></Link>
     </div>
     <WeekSlider number={number} handleClick={setNumber} />
