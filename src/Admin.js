@@ -47,16 +47,33 @@ function Admin() {
 
     useEffect(() => {
       getPosts();
-    }, []);
+    },[]);
 
     async function getPosts() {
       const { data } = await supabase.from("posts").select();
       setPosts(data);
     }
 
+    function formatAMPM(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        var strTime = hours + ':' + minutes + ' ' + ampm;
+        return strTime;
+    }
+
 
     const publish = async () => {
-        const { error } = await supabase.from("posts").insert({type: "words", week: "Sun", date: "4.14", time: "5:37pm", location: "Sydney", content, number: 15})
+        var now = new Date();
+        var days = ['Sun','Mon','Tue','Wed','Thursday','Fri','Sat'];
+        var day = days[ now.getDay() ];
+        var date = now.getMonth()+1 + '.' + now.getDate()
+        var time = formatAMPM(now);
+        var number = getDateWeek();
+        const { error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location: "Sydney", content, number})
         setOpen(false)
     }
 
