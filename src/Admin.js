@@ -51,6 +51,12 @@ function Admin() {
     }
 
 
+    const publish = () => {
+        console.log('publish')
+    }
+
+
+
     if (validated) {
         return (
             <>
@@ -59,7 +65,10 @@ function Admin() {
                 <img src={Add} className='login' onClick={onOpenModal} />
             </div>
             <Modal open={open} onClose={onCloseModal} center>
-                <h2>Simple centered modal</h2>
+                <h2>New</h2>
+                <textarea className='publishContent' name="content" rows={4} cols={40} />
+                <br />
+                <div className='publishBtn' onClick={publish}>Publish</div>
             </Modal>
             <WeekSlider number={number} handleClick={setNumber} />
             {posts.sort((a, b) => b.id - a.id).map(day => day.number === number && <Row day={day} />)}
