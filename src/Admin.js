@@ -6,6 +6,7 @@ import { useState , useEffect} from 'react';
 import { supabase } from './utils/supabase'
 import FadeIn from 'react-fade-in';
 import Add from './assets/plus.svg';
+import Delete from './assets/minus.svg';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { Link } from "react-router-dom";
@@ -73,18 +74,20 @@ function Admin() {
         var date = now.getMonth()+1 + '.' + now.getDate()
         var time = formatAMPM(now);
         var number = getDateWeek();
-        const { error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location: "Sydney", content, number})
+        const { data, error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location: "Sydney", content, number}).select()
+        // setPosts([...posts, ...data])
         setOpen(false)
     }
-
-
 
     if (validated) {
         return (
             <>
             <div className="header">
                 <Link className='year' to="/"><div>2024</div></Link>
+                <div>
                 <img src={Add} className='login' onClick={onOpenModal} />
+                <img src={Delete} className='login' onClick={() => console.log('notify all rows it is delete mode')} />
+                </div>
             </div>
             <Modal open={open} onClose={onCloseModal} center>
                 <h2>New</h2>
