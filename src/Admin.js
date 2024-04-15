@@ -31,6 +31,7 @@ function getDateWeek(date) {
 
 function Admin() {
 
+    const [showDelete, setShowDelete] = useState(false);
     const [content, setContent] = useState('');
 
     const [open, setOpen] = useState(false);
@@ -74,9 +75,17 @@ function Admin() {
         var date = now.getMonth()+1 + '.' + now.getDate()
         var time = formatAMPM(now);
         var number = getDateWeek();
-        const { data, error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location: "Sydney", content, number}).select()
+        const { data, error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location: "Sydney", content, number, public: true}).select()
         // setPosts([...posts, ...data])
         setOpen(false)
+    }
+
+    const deletePost = async (id) => {
+        const { error } = await supabase
+            .from('posts')
+            .update({ public: false })
+            .eq('id', id)
+            setShowDelete(false)
     }
 
     if (validated) {
@@ -86,7 +95,7 @@ function Admin() {
                 <Link className='year' to="/"><div>2024</div></Link>
                 <div>
                 <img src={Add} className='login' onClick={onOpenModal} />
-                <img src={Delete} className='login' onClick={() => console.log('notify all rows it is delete mode')} />
+                <img src={Delete} className='login' onClick={() => setShowDelete(!showDelete)} />
                 </div>
             </div>
             <Modal open={open} onClose={onCloseModal} center>
@@ -96,7 +105,7 @@ function Admin() {
                 <div className='publishBtn' onClick={publish}>Publish</div>
             </Modal>
             <WeekSlider number={number} handleClick={setNumber} />
-            {posts.sort((a, b) => b.id - a.id).map(day => day.number === number && <Row day={day} />)}
+            {posts.sort((a, b) => b.id - a.id).map(day => day.number === number && day.public && <Row showDelete={showDelete} deletePost={deletePost} day={day} />)}
             <footer className='footer'>2024 © Yang Fei</footer>
             </>
         );

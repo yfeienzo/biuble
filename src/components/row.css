@@ -5,6 +5,7 @@
 
 .row {
     display: flex;
+    position: relative
 }
 .content {
     padding: 1rem;
@@ -12,4 +13,10 @@
     text-wrap: wrap;
     line-height: 2;
     font-family: Typewriter;
+}
+
+.delete {
+    position: absolute;
+    right: 1rem;
+    top: 0;
 }

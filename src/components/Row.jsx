@@ -5,15 +5,17 @@ import FadeIn from 'react-fade-in';
 
 
 
-function Row ({day}) {
+function Row ({day, deletePost, showDelete}) {
     const [poem] = useTypewriter({
         words: day.type === "poems" && JSON.parse(day.content),
         loop: 0,
         deleteSpeed: 30
       })
+
     return (
         <FadeIn>
             <div className="row">
+                {showDelete && <div className="delete" onClick={() => deletePost(day.id)}>X</div>}
                 <TimeLocation day={day} />
                 <div className="content">{
                 day.type === "words" ? day.content :

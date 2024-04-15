@@ -46,7 +46,7 @@ function App() {
       <Link to="/admin"><img src={Login} className="login" /></Link>
     </div>
     <WeekSlider number={number} handleClick={setNumber} />
-    {posts.sort((a, b) => b.id - a.id).map(day => day.number === number && <Row day={day} />)}
+    {posts.sort((a, b) => b.id - a.id).map(day => day.number === number  && day.public  && <Row day={day} />)}
     <footer className='footer'>2024 © Yang Fei</footer>
     </>
   );
