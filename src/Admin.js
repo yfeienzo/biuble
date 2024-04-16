@@ -47,6 +47,8 @@ function Admin() {
 
   const [posts, setPosts] = useState([]);
 
+  const [file, setFile] = useState(null);
+
     useEffect(() => {
       getPosts();
     },[]);
@@ -67,7 +69,6 @@ function Admin() {
         return strTime;
     }
 
-
     const publish = async () => {
         var now = new Date();
         var days = ['Sun','Mon','Tue','Wed','Thursday','Fri','Sat'];
@@ -75,8 +76,23 @@ function Admin() {
         var date = now.getMonth()+1 + '.' + now.getDate()
         var time = formatAMPM(now);
         var number = getDateWeek();
-        const { data, error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location: "Sydney", content, number, public: true}).select()
-        // setPosts([...posts, ...data])
+        if (file) {
+            const { data, error } = await supabase
+            .storage
+            .from('pics')
+            .upload(file.name, file, {
+                cacheControl: '3600',
+                upsert: false
+            })
+            console.log(error)
+
+            const url = `https://qllcvspwxrjimlngcalj.supabase.co/storage/v1/object/public/pics/${file.name}`
+            const { data2, error2 } = await supabase.from("posts").insert({type: "pics", week: day, date, time, location: "Sydney", content: [url], number, public: true}).select()
+
+        } else {
+            const { data, error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location: "Sydney", content, number, public: true}).select()
+            // setPosts([...posts, ...data])
+        }
         setOpen(false)
     }
 
@@ -102,6 +118,10 @@ function Admin() {
                 <h2>New</h2>
                 <textarea className='publishContent' name="content" rows={4} cols={40} onChange={(e) => setContent(e.target.value)} value={content}/>
                 <br />
+                <label htmlFor="file" >
+                    Choose a file
+                </label>
+                <input id="file" type="file" onChange={e => setFile(e.target.files[0])} />
                 <div className='publishBtn' onClick={publish}>Publish</div>
             </Modal>
             <WeekSlider number={number} handleClick={setNumber} />
