@@ -80,13 +80,11 @@ function Admin() {
             const { data, error } = await supabase
             .storage
             .from('pics')
-            .upload(file.name, file, {
+            .upload(`${file.lastModified}${file.name}`, file, {
                 cacheControl: '3600',
                 upsert: false
             })
-            console.log(error)
-
-            const url = `https://qllcvspwxrjimlngcalj.supabase.co/storage/v1/object/public/pics/${file.name}`
+            const url = `https://qllcvspwxrjimlngcalj.supabase.co/storage/v1/object/public/pics/${file.lastModified}${file.name}`
             const { data2, error2 } = await supabase.from("posts").insert({type: "pics", week: day, date, time, location: "Sydney", content: [url], number, public: true}).select()
 
         } else {
@@ -121,7 +119,7 @@ function Admin() {
                 <label htmlFor="file" >
                     Choose a file
                 </label>
-                <input id="file" type="file" onChange={e => setFile(e.target.files[0])} />
+                <input id="file" type="file" onChange={e => {console.log(e.target.files[0]); setFile(e.target.files[0])}} />
                 <div className='publishBtn' onClick={publish}>Publish</div>
             </Modal>
             <WeekSlider number={number} handleClick={setNumber} />
