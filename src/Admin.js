@@ -86,7 +86,7 @@ function Admin() {
             })
             const url = `https://qllcvspwxrjimlngcalj.supabase.co/storage/v1/object/public/pics/${file.lastModified}${file.name}`
             const { data2, error2 } = await supabase.from("posts").insert({type: "pics", week: day, date, time, location: "Sydney", content: [url], number, public: true}).select()
-
+            setFile(null)
         } else {
             const { data, error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location: "Sydney", content, number, public: true}).select()
             // setPosts([...posts, ...data])
