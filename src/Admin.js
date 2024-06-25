@@ -49,8 +49,11 @@ function Admin() {
 
   const [file, setFile] = useState(null);
 
+  const [publishing, setPublishing] = useState(false)
+
     useEffect(() => {
       getPosts();
+      setFile(null)
     },[]);
 
     async function getPosts() {
@@ -70,12 +73,14 @@ function Admin() {
     }
 
     const publish = async () => {
+        setPublishing(true)
         var now = new Date();
         var days = ['Sun','Mon','Tue','Wed','Thursday','Fri','Sat'];
         var day = days[ now.getDay() ];
         var date = now.getMonth()+1 + '.' + now.getDate()
         var time = formatAMPM(now);
         var number = getDateWeek();
+        let result;
         if (file) {
             const { data, error } = await supabase
             .storage
@@ -86,12 +91,15 @@ function Admin() {
             })
             const url = `https://qllcvspwxrjimlngcalj.supabase.co/storage/v1/object/public/pics/${file.lastModified}${file.name}`
             const { data2, error2 } = await supabase.from("posts").insert({type: "pics", week: day, date, time, location: "Sydney", content: [url], number, public: true}).select()
-            setFile(null)
+            result = data2;
         } else {
             const { data, error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location: "Sydney", content, number, public: true}).select()
-            // setPosts([...posts, ...data])
+            result = data
         }
+        setFile(null)
+        setPublishing(false)
         setOpen(false)
+        setPosts([...posts, ...result])
     }
 
     const deletePost = async (id) => {
@@ -120,7 +128,7 @@ function Admin() {
                     Choose a file
                 </label>
                 <input id="file" type="file" onChange={e => {console.log(e.target.files[0]); setFile(e.target.files[0])}} />
-                <div className='publishBtn' onClick={publish}>Publish</div>
+                <div className='publishBtn' onClick={publish}>{publishing ? 'Publishing...' : 'Publish'}</div>
             </Modal>
             <WeekSlider number={number} handleClick={setNumber} />
             {posts.sort((a, b) => b.id - a.id).map(day => day.number === number && day.public && <Row showDelete={showDelete} deletePost={deletePost} day={day} />)}
