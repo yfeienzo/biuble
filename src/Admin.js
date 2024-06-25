@@ -108,6 +108,7 @@ function Admin() {
             .update({ public: false })
             .eq('id', id)
             setShowDelete(false)
+        setPosts([...posts])
     }
 
     if (validated) {
