@@ -75,7 +75,7 @@ function Admin() {
     const publish = async () => {
         setPublishing(true)
         var now = new Date();
-        var days = ['Sun','Mon','Tue','Wed','Thursday','Fri','Sat'];
+        var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
         var day = days[ now.getDay() ];
         var date = now.getMonth()+1 + '.' + now.getDate()
         var time = formatAMPM(now);
