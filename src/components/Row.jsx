@@ -19,7 +19,7 @@ function Row ({day, deletePost, showDelete}) {
                 <TimeLocation day={day} />
                 <div className="content">{
                 day.type === "words" ? day.content :
-                day.type === "pics" ? JSON.parse(day.content).map(address => address.split(".")[address.split(".").length-1] === 'mov'  ? <video controls width={240} preload="metadata"><source src={`${address}#t=0.1`} type="video/mp4"/></video> : <img width="100%" src={address} /> ):
+                day.type === "pics" ? JSON.parse(day.content).map(address => ['mov', 'mp4'].includes(address.split(".")[address.split(".").length-1]) ? <video controls width={240} preload="metadata"><source src={`${address}#t=0.1`} type="video/mp4"/></video> : <img width="100%" src={address} /> ):
                 day.type == "poems" ? 
                 <div>{poem}</div>
                 : <div>no content</div>}</div>
