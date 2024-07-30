@@ -10,6 +10,8 @@ import Delete from './assets/minus.svg';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { Link } from "react-router-dom";
+import { useGeoLocation } from '@custom-react-hooks/all';
+
 
 
 function getDateWeek(date) {
@@ -51,6 +53,9 @@ function Admin() {
 
   const [publishing, setPublishing] = useState(false)
 
+  const { loading, coordinates, error } = useGeoLocation();
+
+
     useEffect(() => {
       getPosts();
       setFile(null)
@@ -72,32 +77,52 @@ function Admin() {
         return strTime;
     }
 
+    async function getAddress(coordinates) {
+        const url = `https://geocode.maps.co/reverse?lat=${coordinates.latitude}&lon=${coordinates.longitude}&api_key=66a93202d3b07826864271piy9eee04`;
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+          }
+      
+          const json = await response.json();
+          return json.address.city;
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+
     const publish = async () => {
         setPublishing(true)
-        var now = new Date();
-        var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-        var day = days[ now.getDay() ];
-        var date = now.getMonth()+1 + '.' + now.getDate()
-        var time = formatAMPM(now);
-        var number = getDateWeek();
-        if (file) {
-            const { data, error } = await supabase
-            .storage
-            .from('pics')
-            .upload(`${file.lastModified}${file.name}`, file, {
-                cacheControl: '3600',
-                upsert: false
-            })
-            const url = `https://qllcvspwxrjimlngcalj.supabase.co/storage/v1/object/public/pics/${file.lastModified}${file.name}`
-            const { data2, error2 } = await supabase.from("posts").insert({type: "pics", week: day, date, time, location: "Sydney", content: [url], number, public: true}).select()
-        } else {
-            const { data, error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location: "Sydney", content, number, public: true}).select()
+        var location;
+        if (error) { location = 'Sydney' }
+        if (!loading && !error) {
+            location = await getAddress(coordinates)
+            var now = new Date();
+            var days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+            var day = days[ now.getDay() ];
+            var date = now.getMonth()+1 + '.' + now.getDate()
+            var time = formatAMPM(now);
+            var number = getDateWeek();
+            if (file) {
+                const { data, error } = await supabase
+                .storage
+                .from('pics')
+                .upload(`${file.lastModified}${file.name}`, file, {
+                    cacheControl: '3600',
+                    upsert: false
+                })
+                const url = `https://qllcvspwxrjimlngcalj.supabase.co/storage/v1/object/public/pics/${file.lastModified}${file.name}`
+                const { data2, error2 } = await supabase.from("posts").insert({type: "pics", week: day, date, time, location, content: [url], number, public: true}).select()
+            } else {
+                const { data, error } = await supabase.from("posts").insert({type: "words", week: day, date, time, location, content, number, public: true}).select()
+            }
+            setFile(null)
+            setContent('')
+            setPublishing(false)
+            setOpen(false)
+            getPosts()
         }
-        setFile(null)
-        setContent('')
-        setPublishing(false)
-        setOpen(false)
-        getPosts()
     }
 
     const deletePost = async (id) => {
